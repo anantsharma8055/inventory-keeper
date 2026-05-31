@@ -1,4 +1,6 @@
-const API_BASE_URL = 'http://localhost:5001';
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:5001'
+  : window.location.origin;
 const GST_RATE = 0.18;
 
 let products = [];

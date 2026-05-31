@@ -7,6 +7,8 @@ const productRoutes = require('./routes/productRoutes');
 const billRoutes = require('./routes/billRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
+const path = require('path');
+
 const app = express();
 
 // Initialize DB and catch any startup errors so they don't crash Node/Vercel serverless processes
@@ -17,8 +19,12 @@ connectDB().catch((err) => {
 app.use(cors());
 app.use(express.json());
 
+// Serve all static frontend assets (HTML, CSS, JS, etc.) directly from the root directory
+app.use(express.static(path.join(__dirname, '.')));
+
+// Route the root URL directly to your Plywood Inventory Dashboard
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Plywood Inventory API is running' });
+  res.sendFile(path.join(__dirname, 'inventory.html'));
 });
 
 app.use('/', productRoutes);

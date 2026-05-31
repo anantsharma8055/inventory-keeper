@@ -9,7 +9,10 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-connectDB();
+// Initialize DB and catch any startup errors so they don't crash Node/Vercel serverless processes
+connectDB().catch((err) => {
+  console.error('⚠️ Database connection failed to initialize on startup:', err.message);
+});
 
 app.use(cors());
 app.use(express.json());
@@ -23,8 +26,14 @@ app.use('/', billRoutes);
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+// In Vercel serverless environment, Vercel acts as the HTTP listener and routes requests to the exported app.
+// Running app.listen() directly inside Vercel will cause FUNCTION_INVOCATION_FAILED.
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Export the Express app instance so Vercel can wrap and execute it as a Serverless Function
+module.exports = app;

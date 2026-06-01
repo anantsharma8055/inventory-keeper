@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     {
       "source": "/",
@@ -13,19 +7,19 @@
     },
     {
       "source": "/products",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/products/:path*",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/bill",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/bills",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     }
   ]
 }

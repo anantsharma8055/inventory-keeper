@@ -19,13 +19,12 @@ connectDB().catch((err) => {
 app.use(cors());
 app.use(express.json());
 
-// Serve all static frontend assets (HTML, CSS, JS, etc.) directly from the root directory
-// In local development, they are located in parent directory relative to this function
-app.use(express.static(path.join(__dirname, '..')));
+// Serve all static frontend assets (HTML, CSS, JS, etc.) directly from the public directory
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Route the root URL directly to your Plywood Inventory Dashboard
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'inventory.html'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'inventory.html'));
 });
 
 app.use('/', productRoutes);

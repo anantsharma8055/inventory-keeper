@@ -99,15 +99,15 @@ function printThermalBill(billData) {
     if (item.pricingType === 'unit') {
       itemsHtml += `
         <div>${item.name}</div>
-        <div>Qty: ${item.quantity}  Price: ${(item.price || 0).toFixed(2)}</div>
-        <div>Total: Rs. ${itemTotal.toFixed(2)}</div>
+        <div>Qty: ${item.quantity}  Price: ${Number(item.price || 0).toFixed(2)}</div>
+        <div>Total: Rs. ${Number(itemTotal).toFixed(2)}</div>
         <div class="line"></div>
       `;
     } else {
       itemsHtml += `
         <div>${item.name} (${item.length || 0} x ${item.breadth || 0})</div>
-        <div>Qty: ${item.quantity}  Rate: ${(item.rate || 0).toFixed(2)}/sqft</div>
-        <div>Total: Rs. ${itemTotal.toFixed(2)}</div>
+        <div>Qty: ${item.quantity}  Rate: ${Number(item.rate || 0).toFixed(2)}/sqft</div>
+        <div>Total: Rs. ${Number(itemTotal).toFixed(2)}</div>
         <div class="line"></div>
       `;
     }
@@ -129,11 +129,11 @@ function printThermalBill(billData) {
       <div>Date: ${dateStr}  Time: ${timeStr}</div>
       <div class="line"></div>
       <br>${itemsHtml}<br>
-      <div>Subtotal: Rs. ${billData.subtotal.toFixed(2)}</div>
-      <div>GST (18%): Rs. ${billData.gst.toFixed(2)}</div>
-      <div>Delivery: Rs. ${billData.deliveryFee.toFixed(2)}</div>
+      <div>Subtotal: Rs. ${Number(billData.subtotal).toFixed(2)}</div>
+      <div>GST (18%): Rs. ${Number(billData.gst).toFixed(2)}</div>
+      <div>Delivery: Rs. ${Number(billData.deliveryFee).toFixed(2)}</div>
       <div class="line"></div>
-      <div><strong>TOTAL: Rs. ${(billData.totalAmount || billData.grandTotal || 0).toFixed(2)}</strong></div>
+      <div><strong>TOTAL: Rs. ${Number(billData.totalAmount || billData.grandTotal || 0).toFixed(2)}</strong></div>
       <div class="line"></div>
       <div class="center" style="margin-top: 15px;">Thank you for your visit!</div>
     </body>

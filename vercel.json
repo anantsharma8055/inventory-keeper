@@ -6,26 +6,26 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/inventory.html"
+      "source": "/",
+      "destination": "/inventory.html"
     },
     {
-      "src": "/products",
-      "dest": "server.js"
+      "source": "/products",
+      "destination": "/server.js"
     },
     {
-      "src": "/products/(.*)",
-      "dest": "server.js"
+      "source": "/products/:path*",
+      "destination": "/server.js"
     },
     {
-      "src": "/bill",
-      "dest": "server.js"
+      "source": "/bill",
+      "destination": "/server.js"
     },
     {
-      "src": "/bills",
-      "dest": "server.js"
+      "source": "/bills",
+      "destination": "/server.js"
     }
   ]
 }
